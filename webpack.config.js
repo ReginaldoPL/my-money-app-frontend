@@ -2,33 +2,33 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-    entry:'./src/index.jsx',
-    output:{
+    entry: './src/index.jsx',
+    output: {
         path: __dirname + '/public',
         filename: './app.js'
     },
-    devServer:{
-        port:8080,
+    devServer: {
+        port: 8080,
         contentBase: './public',
     },
     resolve: {
-        extensions: ['','.js','.jsx'],
+        extensions: ['', '.js', '.jsx'],
         alias: {
-            module: __dirname+'/node_modules',
-            jquery: 'modules/admin-lte/plugin/jquery/jquery',
-            bootstrap: 'modules/admin-lte/bootstrap/js/bootstrap'
+            modules: __dirname + '/node_modules',
+            jquery: 'modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js',
+            bootstrap: 'modules/admin-lte/bootstrap/js/bootstrap.js'
         }
     },
-    plugins: [
+    plugins: [ 
         new webpack.ProvidePlugin({
-            $:'jquery',
+            $: 'jquery',
             jQuery: 'jquery',
-            'window.jQuery':'jquery'
+            'window.jQuery': 'jquery'
         }),
         new ExtractTextPlugin('app.css')
     ],
     module: {
-        loadres:[{
+        loaders: [{
             test: /.js[x]?$/,
             loader: 'babel-loader',
             exclude: /node_modules/,
@@ -36,12 +36,12 @@ module.exports = {
                 presets: ['es2015', 'react'],
                 plugins: ['transform-object-rest-spread']
             }
-        },{
+        }, {
             test: /\.css$/,
-            loader:ExtractTextPlugin.extract('style-loader', 'css-loader')
-        },{
+            loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        }, {
             test: /\.woff|.woff2|.ttf|.eot|.svg|.png|.jpg*.*$/,
-            loader:'file'        
+            loader: 'file'
         }]
     }
 }
