@@ -1,7 +1,7 @@
 import 'modules/admin-lte/plugins/jQueryUI/jquery-ui.min'
 import 'modules/admin-lte/plugins/fastclick/fastclick'
 import 'modules/admin-lte/plugins/slimScroll/jquery.slimScroll.min'
-import 'modules/admin-lte/dist/app.min'
+import 'modules/admin-lte/dist/js/app.min'
 
 import 'modules/font-awesome/css/font-awesome.min.css'
 import 'modules/ionicons/dist/css/ionicons.min.css'
