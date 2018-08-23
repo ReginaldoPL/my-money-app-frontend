@@ -10,6 +10,7 @@ export default props => (
             </div>
             <div className='icon'>
                 <i className={`fa fa-${props.icon}`}></i>
+                
             </div>
         </div>
 
