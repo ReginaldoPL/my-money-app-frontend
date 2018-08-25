@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux'
 
+import {getSummary} from './dashboardAction'
 import ContentHeader from '../common/template/contentHeader'
 import Content from '../common/template/content'
 import ValueBox from '../common/widget/valueBox'
@@ -9,8 +11,15 @@ import Row from '../common/layout/row'
 
 
 class Dashboard extends Component {
+
+    //métodod executado ao Montar o componente na tela
+    componentWillMount() {
+        this.props.getSummary()
+
+    }
+
     render(){
-        //pegando os valores do redux
+        //pegando os valores do estado que recebeu do REDUX
         const { credit, debt} = this.props.summary
         return(
             
@@ -33,5 +42,7 @@ class Dashboard extends Component {
     }
 }
 ///vincular props do objeto atual com o do Redux
+//summary: receber o state.dashobard.summary do reducers
 const mapStateToProps = state => ({summary: state.dashboard.summary})
-export default connect(mapStateToProps)(Dashboard)
+const mapDispatchToProps = dispatch => bindActionCreators({getSummary}, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
