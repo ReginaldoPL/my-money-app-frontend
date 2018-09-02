@@ -17,12 +17,26 @@ export function getList() {
 }
 
 export function create(values){
+    return submit(values, 'post')
+}
+export function remove(values){
+    return submit(values, 'delete')
+}
+
+export function update(values) {
+    return submit(values, 'put')
+}
+
+function submit (values, method) {
     return dispatch => {
-        axios.post(`${BASE_URL}/billingCycles`,values)
+        //const id = values._id || '' >> talvez funcione
+        const id = values._id ? values._id : ''
+       // axios.post(`${BASE_URL}/billingCycles`,values)
+       axios[method](`${BASE_URL}/billingCycles/${id}`,values)
         .then(resp => {
             toastr.success('Sucesso', 'Operação realizada com sucesso.')
             //só posso usar isso pq estou usando o redux-multi
-            dispatch(init())
+            dispatch(init()) //inicializa tudo
         })
         .catch(e => {
             e.response.data.errors.forEach(
@@ -31,7 +45,7 @@ export function create(values){
             
         })
     }
-    
+
 }
 
 export function showUpdate(billingCycle){
@@ -39,9 +53,14 @@ export function showUpdate(billingCycle){
         showTabs('tabUpdate'),
         selectTab('tabUpdate'),
         initialize('billingCycleForm', billingCycle)
-
     ]
-
+}
+export function showDelete(billingCycle){
+    return [
+        showTabs('tabDelete'),
+        selectTab('tabDelete'),
+        initialize('billingCycleForm', billingCycle)
+    ]
 }
 
 export function init(){
